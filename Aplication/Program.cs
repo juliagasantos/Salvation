@@ -3,13 +3,13 @@ using Salvation.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//base de dados
+builder.Services.AddDbContext<SalvationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-
-//base de dados
-builder.Services.AddDbContext<SalvationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 //autenticação
 

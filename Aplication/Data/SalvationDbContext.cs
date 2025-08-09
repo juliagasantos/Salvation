@@ -12,7 +12,7 @@ namespace Salvation.Data
         }
 
         //propriedades DbSet representam nossas tabelas
-        public DbSet<Classificacao> Classificacaos { get; set; }
+        public DbSet<Classificacao> Classificacoes { get; set; }
         public DbSet<Genero> Generos { get; set; }
         public DbSet<Filme> Filmes { get; set; }
         public DbSet<TipoUsuario> TipoUsuarios { get; set; }

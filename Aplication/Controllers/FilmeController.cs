@@ -50,7 +50,7 @@ namespace Salvation.Controllers
             };
         }
 
-        //index
+        //idex
         [Authorize(Roles = "Administrador, Gerente, Outros")]
         public async Task<IActionResult> Index(int? generoId, string? search)
         {

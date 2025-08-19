@@ -110,7 +110,6 @@ namespace Salvation.Controllers
         private async Task<UsuarioViewModel> CriarUsuarioViewModel(UsuarioViewModel? model = null)
         {
             var tipos = await _tipoUsuarioRepository.GetAllAsync();
-
             return new UsuarioViewModel
             {
                 IdUsuario = model?.IdUsuario ?? 0,
@@ -159,6 +158,106 @@ namespace Salvation.Controllers
 
             viewModel = await CriarUsuarioViewModel(viewModel);
             return View(viewModel);
+        }
+
+        //Edit
+        [Authorize(Roles = "Administrador,Gerente")]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var usuario = await _usuarioRepository.GetByIdAsync(id);
+            if (usuario == null) return NotFound();
+
+            var viewModel = new UsuarioViewModel
+            {
+                IdUsuario = usuario.IdUsuario,
+                Nome = usuario.Nome,
+                Email = usuario.Email,
+                Senha = usuario.Senha,
+                DataNascimento = usuario.DataNascimento,
+                TipoUsuarioId = usuario.TipoUsuarioId,
+                TiposUsuarios = (await _tipoUsuarioRepository.GetAllAsync()).Select(t => new SelectListItem
+                {
+                    Value = t.IdTipoUsuario.ToString(),
+                    Text = t.DescricaoTipoUsuario
+                })
+            };
+
+            return View(viewModel);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, UsuarioViewModel viewModel)
+        {
+            if (id != viewModel.IdUsuario)
+                return NotFound();
+
+            if (ModelState.IsValid)
+            {
+                var usuario = await _usuarioRepository.GetByIdAsync(id);
+                if (usuario == null)
+                    return NotFound();
+
+                usuario.Nome = viewModel.Nome;
+                usuario.Email = viewModel.Email;
+                usuario.Senha = viewModel.Senha;
+                usuario.DataNascimento = viewModel.DataNascimento;
+                usuario.TipoUsuarioId = viewModel.TipoUsuarioId;
+
+                await _usuarioRepository.UpdateAsync(usuario);
+                return RedirectToAction(nameof(Index));
+            }
+
+            viewModel = await CriarUsuarioViewModel(viewModel);
+            return View(viewModel);
+        }
+
+
+        //delete
+        [Authorize(Roles = "Administrador")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var usuario = await _usuarioRepository.GetByIdAsync(id);
+            if (usuario == null)
+                return NotFound();
+
+            return View(usuario);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _usuarioRepository.InativarAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        //inativos
+        [Authorize(Roles = "Administrador")]
+        public async Task<IActionResult> Inativos()
+        {
+            var usuarios = await _usuarioRepository.GetAllAsync();
+            var inativos = usuarios
+                .Where(u => !u.Ativo)
+                .OrderByDescending(u => u.IdUsuario)
+                .ToList();
+
+            return View(inativos);
+        }
+
+
+        //reativar
+        [Authorize(Roles = "Administrador")]
+        public async Task<IActionResult> Ativar(int id)
+        {
+            var usuario = await _usuarioRepository.GetByIdAsync(id);
+            if (usuario == null) return NotFound();
+
+            usuario.Ativo = true;
+            await _usuarioRepository.UpdateAsync(usuario);
+
+            return RedirectToAction(nameof(Inativos));
         }
 
     }

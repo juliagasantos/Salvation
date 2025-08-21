@@ -1,7 +1,7 @@
-﻿using Aplication.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Salvation.Data;
 using Salvation.Interfaces;
+using Salvation.Models;
 
 namespace Salvation.Repositories
 {

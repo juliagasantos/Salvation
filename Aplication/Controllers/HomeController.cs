@@ -1,8 +1,8 @@
-using System.Diagnostics;
-using Aplication.Models;
 using Microsoft.AspNetCore.Mvc;
+using Salvation.Models;
+using System.Diagnostics;
 
-namespace Aplication.Controllers
+namespace Salvation.Controllers
 {
     public class HomeController : Controller
     {

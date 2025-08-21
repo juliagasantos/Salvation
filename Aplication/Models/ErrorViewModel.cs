@@ -1,4 +1,4 @@
-namespace Aplication.Models
+namespace Salvation.Models
 {
     public class ErrorViewModel
     {

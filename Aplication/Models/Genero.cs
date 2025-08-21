@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Aplication.Models
+namespace Salvation.Models
 {
     [Table("Genero")]
     public class Genero

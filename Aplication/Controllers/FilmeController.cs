@@ -1,8 +1,8 @@
-﻿using Aplication.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Salvation.Interfaces;
+using Salvation.Models;
 using Salvation.ViewModels;
 
 namespace Salvation.Controllers
@@ -42,7 +42,7 @@ namespace Salvation.Controllers
                     Value = g.IdGenero.ToString(),
                     Text = g.DescricaoGenero
                 }),
-                Classificacaos = classificacoes.Select(c => new SelectListItem
+                Classificacoes = classificacoes.Select(c => new SelectListItem
                 {
                     Value = c.IdClassificacao.ToString(),
                     Text = c.DescricaoClassificacao
@@ -51,7 +51,7 @@ namespace Salvation.Controllers
         }
 
         //idex
-        [Authorize(Roles = "Administrador, Gerente, Outros")]
+        //[Authorize(Roles = "Administrador, Gerente, Outros")]
         public async Task<IActionResult> Index(int? generoId, string? search)
         {
             var filmes = await _filmeRepository.GetAllAsync();
@@ -132,7 +132,7 @@ namespace Salvation.Controllers
                     Value = g.IdGenero.ToString(),
                     Text = g.DescricaoGenero
                 }),
-                Classificacaos = (await _classificacaoRepository.GetAllAsync()).Select(c => new SelectListItem
+                Classificacoes = (await _classificacaoRepository.GetAllAsync()).Select(c => new SelectListItem
                 {
                     Value = c.IdClassificacao.ToString(),
                     Text = c.DescricaoClassificacao

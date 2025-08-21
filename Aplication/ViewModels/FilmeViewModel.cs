@@ -13,7 +13,7 @@ namespace Salvation.ViewModels
         public int GeneroId { get; set; }
 
         //coleção para popular o dropdown
-        public IEnumerable<SelectListItem>? Classificacaos { get; set; }
+        public IEnumerable<SelectListItem>? Classificacoes { get; set; }
         public IEnumerable<SelectListItem>? Generos { get; set; }
     }
 }

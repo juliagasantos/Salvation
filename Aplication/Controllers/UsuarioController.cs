@@ -1,9 +1,9 @@
-﻿using Aplication.Models;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Salvation.Interfaces;
+using Salvation.Models;
 using Salvation.ViewModels;
 using System.Security.Claims;
 

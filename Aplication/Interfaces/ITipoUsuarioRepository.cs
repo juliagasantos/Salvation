@@ -1,4 +1,4 @@
-﻿using Aplication.Models;
+﻿using Salvation.Models;
 
 namespace Salvation.Interfaces
 {

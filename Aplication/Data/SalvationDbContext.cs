@@ -1,5 +1,5 @@
-﻿using Aplication.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Salvation.Models;
 
 namespace Salvation.Data
 {

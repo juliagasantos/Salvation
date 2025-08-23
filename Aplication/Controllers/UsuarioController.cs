@@ -118,7 +118,7 @@ namespace Salvation.Controllers
                 Senha = model?.Senha,
                 DataNascimento = model?.DataNascimento ?? DateTime.Now,
                 TipoUsuarioId = model?.TipoUsuarioId ?? 0,
-                TiposUsuarios = tipos.Select(t => new SelectListItem
+                TiposUsuario = tipos.Select(t => new SelectListItem
                 {
                     Value = t.IdTipoUsuario.ToString(),
                     Text = t.DescricaoTipoUsuario
@@ -175,7 +175,7 @@ namespace Salvation.Controllers
                 Senha = usuario.Senha,
                 DataNascimento = usuario.DataNascimento,
                 TipoUsuarioId = usuario.TipoUsuarioId,
-                TiposUsuarios = (await _tipoUsuarioRepository.GetAllAsync()).Select(t => new SelectListItem
+                TiposUsuario = (await _tipoUsuarioRepository.GetAllAsync()).Select(t => new SelectListItem
                 {
                     Value = t.IdTipoUsuario.ToString(),
                     Text = t.DescricaoTipoUsuario

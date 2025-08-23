@@ -12,7 +12,7 @@ namespace Salvation.ViewModels
         public int TipoUsuarioId { get; set; }
 
         //coleção para popular o dropdown
-        public IEnumerable<SelectListItem>? TiposUsuarios { get; set; }
+        public IEnumerable<SelectListItem>? TiposUsuario { get; set; }
 
     }
 }

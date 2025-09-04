@@ -14,33 +14,40 @@ namespace Salvation.Repositories
         }
 
         // Implementar somente este método
-        public Task<List<TipoUsuario>> GetAllAsync()
+        public async Task<List<TipoUsuario>> GetAllAsync()
         {
-            return _context.TipoUsuarios.ToListAsync();
+            return await _context.TipoUsuarios.Include(t => t.Usuarios).ToListAsync();
         }
 
 
 
-        public Task AddAsync(TipoUsuario tipoUsuarionero)
+        public async Task AddAsync(TipoUsuario tipoUsuario)
         {
-            throw new NotImplementedException();
+            await _context.TipoUsuarios.AddAsync(tipoUsuario);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var tipoUsuario = await _context.TipoUsuarios.FirstOrDefaultAsync(t => t.IdTipoUsuario == id);
+            if (tipoUsuario != null)
+            {
+                _context.TipoUsuarios.Remove(tipoUsuario);
+                await _context.SaveChangesAsync();
+            }
         }
 
         
 
-        public Task<TipoUsuario> GetByIdAsync(int id)
+        public async Task<TipoUsuario> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.TipoUsuarios.Include(t => t.Usuarios).FirstOrDefaultAsync(t => t.IdTipoUsuario == id);
         }
 
-        public Task UpdateAsync(TipoUsuario tipoUsuario)
+        public async Task UpdateAsync(TipoUsuario tipoUsuario)
         {
-            throw new NotImplementedException();
+            _context.TipoUsuarios.Update(tipoUsuario);
+            await _context.SaveChangesAsync();
         }
     }
 }

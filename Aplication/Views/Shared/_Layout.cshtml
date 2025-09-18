@@ -57,6 +57,8 @@
                 @if (User.IsInRole("Administrador"))
                 {
                     <li><a class="nav-link text-light" asp-controller="Usuario" asp-action="Inativos">🧟‍♂️ Inativos</a></li>
+
+                    <li><a class="nav-link text-light" asp-controller="Dashboard" asp-action="Index">📊 Dashboard</a></li>
                 }
 
                 <li class="mt-4">
